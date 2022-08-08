@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Domain\Product\UseCases\GetProducts;
 
-use Domain\Product\Repositories\ProductRepository;
+use Domain\Product\Repositories\BaseRepository;
 
 class GetProducts
 {
-    private ProductRepository $repository;
+    private BaseRepository $repository;
 
-    public function __construct(ProductRepository $repository)
+    public function __construct(BaseRepository $repository)
     {
         $this->repository = $repository;
     }

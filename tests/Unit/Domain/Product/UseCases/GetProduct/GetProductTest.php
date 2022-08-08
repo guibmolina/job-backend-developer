@@ -6,7 +6,7 @@ namespace Tests\Domain\Product\UseCases\GetProduct;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\Exceptions\NotFoundProductException;
-use Domain\Product\Repositories\ProductRepository;
+use Domain\Product\Repositories\BaseRepository;
 use Domain\Product\UseCases\GetProduct\DTO;
 use Domain\Product\UseCases\GetProduct\GetProduct;
 use Domain\Product\UseCases\GetProduct\Response;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class GetProductTest extends TestCase
 {
-    private ProductRepository $repository;
+    private BaseRepository $repository;
 
     private ProductEntity $entity;
 
@@ -24,14 +24,10 @@ class GetProductTest extends TestCase
     {
         parent::setUp();
 
-        $this->repository = $this->getMockBuilder(ProductRepository::class)
+        $this->repository = $this->getMockBuilder(BaseRepository::class)
         ->onlyMethods([
-            'create',
             'findProductById',
-            'findProductByName',
             'findProductsBy',
-            'delete',
-            'update',
         ])
         ->getMock();
 

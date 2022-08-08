@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Domain\Product\UseCases\GetProduct;
 
 use Domain\Product\Exceptions\NotFoundProductException;
-use Domain\Product\Repositories\ProductRepository;
+use Domain\Product\Repositories\BaseRepository;
 
 class GetProduct
 {
-    private ProductRepository $repository;
+    private BaseRepository $repository;
 
-    public function __construct(ProductRepository $repository)
+    public function __construct(BaseRepository $repository)
     {
         $this->repository = $repository;
     }

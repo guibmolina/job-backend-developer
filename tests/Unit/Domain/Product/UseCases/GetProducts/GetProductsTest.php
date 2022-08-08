@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Domain\Product\UseCases\GetProducts;
 
 use Domain\Product\List\ProductList;
-use Domain\Product\Repositories\ProductRepository;
+use Domain\Product\Repositories\BaseRepository;
 use Domain\Product\UseCases\GetProducts\GetProducts;
 use Domain\Product\UseCases\GetProducts\DTO;
 use Domain\Product\UseCases\GetProducts\Response;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class GetProductsTest extends TestCase
 {
-    private ProductRepository $repository;
+    private BaseRepository $repository;
 
     private ProductList $productList;
 
@@ -23,14 +23,10 @@ class GetProductsTest extends TestCase
     {
         parent::setUp();
 
-        $this->repository = $this->getMockBuilder(ProductRepository::class)
+        $this->repository = $this->getMockBuilder(BaseRepository::class)
         ->onlyMethods([
-            'create',
             'findProductById',
-            'findProductByName',
             'findProductsBy',
-            'delete',
-            'update',
         ])
         ->getMock();
 
