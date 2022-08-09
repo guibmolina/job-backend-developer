@@ -6,6 +6,7 @@ namespace Domain\Product\UseCases\Update;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\Exceptions\NotFoundProductException;
+use Domain\Product\Exceptions\ProductAlreadyExistException;
 use Domain\Product\Repositories\ProductRepository as Repository;
 
 class Update
@@ -23,6 +24,12 @@ class Update
 
         if (!$product) {
             throw new NotFoundProductException("Not Found product $DTO->id");
+        }
+
+        $productSameName = $this->repository->findProductByName($DTO->name);
+
+        if ($productSameName) {
+            throw new ProductAlreadyExistException("The product $DTO->name already exist");
         }
 
         $newProduct = new ProductEntity(

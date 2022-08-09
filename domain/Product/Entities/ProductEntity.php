@@ -6,7 +6,7 @@ namespace Domain\Product\Entities;
 
 class ProductEntity
 {
-    private int $id;
+    private ?int $id = null;
 
     private string $name;
 
@@ -16,14 +16,14 @@ class ProductEntity
 
     private string $description;
 
-    private ?string $imageUrl = null;
+    private ?string $imageUrl;
 
     public function __construct(
         string $name,
         float $price,
         string $description,
         string $category,
-        ?string $imageUrl
+        ?string $imageUrl = null
     ) {
         $this->name = $name;
         $this->price = $price;
@@ -37,7 +37,7 @@ class ProductEntity
         $this->id = $id;
     }
 
-    public function id(): int
+    public function id(): ?int
     {
         return $this->id;
     }

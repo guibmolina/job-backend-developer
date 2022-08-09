@@ -11,5 +11,5 @@ interface BaseRepository
 {
     public function findProductById(int $id): ?ProductEntity;
 
-    public function findProductsBy(array $searchFilters): ProductList;
+    public function findProductsBy(array $searchFilters, ?bool $withImage): ProductList;
 }

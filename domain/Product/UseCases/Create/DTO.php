@@ -14,14 +14,14 @@ class DTO
 
     public string $description;
 
-    public ?string $imageUrl = null;
+    public ?string $imageUrl;
 
     public function __construct(
         string $name,
         float $price,
         string $description,
         string $category,
-        ?string $imageUrl
+        ?string $imageUrl = null
     ) {
         $this->name = $name;
         $this->price = $price;

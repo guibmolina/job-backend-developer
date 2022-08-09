@@ -17,7 +17,7 @@ class GetProducts
 
     public function execute(DTO $DTO): Response
     {
-        $products = $this->repository->findProductsBy($DTO->search);
+        $products = $this->repository->findProductsBy($DTO->search, $DTO->withImage);
 
         return new Response($products);
     }

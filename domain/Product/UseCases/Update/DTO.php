@@ -16,7 +16,7 @@ class DTO
 
     public string $description;
 
-    public ?string $imageUrl = null;
+    public ?string $imageUrl;
 
     public function __construct(
         int $id,
@@ -24,7 +24,7 @@ class DTO
         float $price,
         string $description,
         string $category,
-        ?string $imageUrl
+        ?string $imageUrl = null
     ) {
         $this->id = $id;
         $this->name = $name;
