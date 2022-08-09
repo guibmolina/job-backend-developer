@@ -27,5 +27,6 @@ class ResponseTest extends TestCase
         $reponse = new Response($this->entity);
 
         self::assertIsArray($reponse->response());
+        self::assertArrayHasKey('id', $reponse->response());
     }
 }

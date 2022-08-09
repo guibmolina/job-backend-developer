@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\GetProduct;
+namespace Tests\Domain\Product\UseCases\Update;
 
 use Domain\Product\Entities\ProductEntity;
-use Domain\Product\UseCases\GetProduct\Response;
+use Domain\Product\UseCases\Update\Response;
 use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase
@@ -27,10 +27,6 @@ class ResponseTest extends TestCase
         $reponse = new Response($this->entity);
 
         self::assertIsArray($reponse->response());
-        self::assertArrayHasKey('name', $reponse->response());
-        self::assertArrayHasKey('price', $reponse->response());
-        self::assertArrayHasKey('description', $reponse->response());
-        self::assertArrayHasKey('category', $reponse->response());
-        self::assertArrayHasKey('image', $reponse->response());
+        self::assertArrayHasKey('id', $reponse->response());
     }
 }

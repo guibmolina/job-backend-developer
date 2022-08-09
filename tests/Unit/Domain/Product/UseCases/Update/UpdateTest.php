@@ -6,6 +6,7 @@ namespace Tests\Domain\Product\UseCases\Update;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\Exceptions\NotFoundProductException;
+use Domain\Product\Exceptions\ProductAlreadyExistException;
 use Domain\Product\Repositories\ProductRepository;
 use Domain\Product\UseCases\Update\DTO;
 use Domain\Product\UseCases\Update\Response;
@@ -30,6 +31,7 @@ class UpdateTest extends TestCase
             'findProductById',
             'findProductByName',
             'findProductsBy',
+            'findProductsByCategory',
             'delete',
             'update',
         ])
@@ -62,6 +64,29 @@ class UpdateTest extends TestCase
     }
 
     /** @test */
+    public function itShouldTrowAProductAlreadyExistExceptionWhenProductAlreadyExist()
+    {
+        $this->expectException(ProductAlreadyExistException::class);
+
+        $this->DTO->id = 1;
+        $this->DTO->name = 'Test';
+
+        $this->repository->expects($this->once())
+        ->method('findProductByName')
+        ->with($this->DTO->name)
+        ->willReturn($this->entity);
+
+        $this->repository->expects($this->once())
+        ->method('findProductById')
+        ->with($this->DTO->id)
+        ->willReturn($this->entity);
+
+        $updateUseCase = new Update($this->repository);
+
+        $updateUseCase->execute($this->DTO);
+    }
+
+    /** @test */
     public function itShouldReturnInstanceOfResponse()
     {
         $this->DTO->id = 1;
@@ -70,6 +95,10 @@ class UpdateTest extends TestCase
         $this->DTO->description = 'product description test';
         $this->DTO->category = 'test';
         $this->DTO->imageUrl = null;
+
+        $this->entity->expects($this->once())
+        ->method('id')
+        ->willReturn($this->DTO->id);
 
         $this->repository->expects($this->once())
         ->method('findProductById')

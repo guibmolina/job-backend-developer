@@ -41,10 +41,11 @@ class GetProductsTest extends TestCase
     public function itShouldReturnInstanceOfResponse(): void
     {
         $this->DTO->search = [];
+        $this->DTO->withImage = null;
 
         $this->repository->expects($this->once())
         ->method('findProductsBy')
-        ->with($this->DTO->search)
+        ->with($this->DTO->search, $this->DTO->withImage)
         ->willReturn($this->productList);
 
         $getProductsUseCase = new GetProducts($this->repository);

@@ -29,6 +29,7 @@ class DeleteTest extends TestCase
             'findProductById',
             'findProductByName',
             'findProductsBy',
+            'findProductsByCategory',
             'delete',
             'update',
         ])
