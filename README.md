@@ -251,7 +251,7 @@ name        | string    	 | true
 price       | float     	 | true      
 decription  | string    	 | true         
 category    | string    	 | true         
-image_url   | string (url)   | false  
+image       | string (url)   | false  
 
 Resposta
 ```
@@ -282,7 +282,7 @@ name        | string    	 | true
 price       | float     	 | true      
 decription  | string    	 | true         
 category    | string    	 | true         
-image_url   | string (url)   | false   
+image       | string (url)   | false   
 
 Resposta
 ```
