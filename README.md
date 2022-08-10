@@ -315,5 +315,9 @@ Podemos realizar a importação dos produtos que estão na API [https://fakestor
 Para conseguir rodar os testes de integração e os unitários, rodar o seguinte CREATE dentro do container de banco de dados (yampi_test_db);
 
 `CREATE database testing;`
+
+E depois executar dentro do container yampi_test_app
+
+ `php vendor/bin/phpunit tests` 
 ***
 
