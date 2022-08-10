@@ -35,7 +35,7 @@ class ProductAPIRepository implements BaseRepository
         $url = env('BASE_FAKE_API_PRODUCTS_URL');
 
         $products = HTTP::get($url)->json();
-        
+
         $productList = new ProductList();
 
         foreach ($products as $product) {

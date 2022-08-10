@@ -20,7 +20,7 @@ class ProductDBRepository implements ProductRepository
         $product->description = $entity->description();
         $product->category = $entity->category();
         $product->image = $entity->imageUrl();
-        
+
         try {
             $product->save();
         } catch (Exception $e) {
@@ -39,7 +39,6 @@ class ProductDBRepository implements ProductRepository
         }
 
         return $this->mapProductEntityDomain($product);
-
     }
 
     public function findProductByName(string $name): ?ProductEntity
@@ -64,7 +63,7 @@ class ProductDBRepository implements ProductRepository
         if (!is_null($withImage)) {
             $query->when($withImage, function ($query) {
                 $query->whereNotNull('image');
-            }, function($query) {
+            }, function ($query) {
                 $query->whereNull('image');
             });
         }

@@ -31,5 +31,4 @@ class ProductRequest extends FormRequest
             'image' => 'nullable|url',
         ];
     }
-    
 }

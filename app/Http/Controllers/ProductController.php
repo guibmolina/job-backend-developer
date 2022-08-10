@@ -9,7 +9,7 @@ use Domain\Product\UseCases\Create\Create;
 use Domain\Product\UseCases\Create\DTO as CreateDTO;
 use Domain\Product\UseCases\Delete\Delete;
 use Domain\Product\UseCases\Delete\DTO as DeleteDTO;
-use Domain\Product\UseCases\GetProduct\DTO;
+use Domain\Product\UseCases\GetProduct\DTO as GetProductDTO;
 use Domain\Product\UseCases\GetProduct\GetProduct;
 use Domain\Product\UseCases\GetProducts\DTO as GetProductsDTO;
 use Domain\Product\UseCases\GetProducts\GetProducts;
@@ -26,7 +26,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $withImage = is_null($request->query('withImage')) ? null : $request->boolean('withImage') ; 
+        $withImage = is_null($request->query('withImage')) ? null : $request->boolean('withImage');
 
         $DTO = new GetProductsDTO($request->query('search'), $withImage);
 
@@ -43,10 +43,10 @@ class ProductController extends Controller
 
     public function show(int $id): JsonResponse
     {
-        $DTO = new DTO($id);
+        $DTO = new GetProductDTO($id);
 
         $getProductUseCase = new GetProduct(new ProductDBRepository());
-        
+
         try {
             $product = $getProductUseCase->execute($DTO);
         } catch (NotFoundProductException $e) {
@@ -133,7 +133,7 @@ class ProductController extends Controller
     {
         $DTO = new GetProductsByCategoryDTO($category);
 
-        $getProductsByCategoryUseCase = new GetProductsByCategory(new ProductDBRepository);
+        $getProductsByCategoryUseCase = new GetProductsByCategory(new ProductDBRepository());
 
         try {
             $products = $getProductsByCategoryUseCase->execute($DTO);

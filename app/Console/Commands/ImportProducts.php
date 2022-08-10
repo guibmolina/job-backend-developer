@@ -3,12 +3,11 @@
 namespace App\Console\Commands;
 
 use Domain\Product\Exceptions\NotFoundProductException;
-use Domain\Product\Exceptions\ProductAlreadyExistException;
 use Domain\Product\UseCases\Create\Create;
 use Domain\Product\UseCases\Create\DTO as CreateDTO;
 use Domain\Product\UseCases\GetProduct\DTO as GetProductDTO;
 use Domain\Product\UseCases\GetProduct\GetProduct;
-use Domain\Product\UseCases\GetProducts\DTO;
+use Domain\Product\UseCases\GetProducts\DTO as GetProductsDTO;
 use Domain\Product\UseCases\GetProducts\GetProducts;
 use Exception;
 use Illuminate\Console\Command;
@@ -42,10 +41,10 @@ class ImportProducts extends Command
         $id = $this->option('id');
 
         if ($id === "NULL" || !$id) {
-            $DTO = new DTO();
-    
+            $DTO = new GetProductsDTO();
+
             $getProductsUseCase = new GetProducts(new ProductAPIRepository());
-    
+
             try {
                 $products = $getProductsUseCase->execute($DTO);
             } catch (Exception $e) {
@@ -64,12 +63,11 @@ class ImportProducts extends Command
             $product = $getProductUseCase->execute($DTO);
         } catch (NotFoundProductException $e) {
             return $this->error($e->getMessage());
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return $this->error($e->getMessage());
         }
 
         return $this->createProducts([$product->response()]);
-
     }
 
     private function createProducts(array $products): void
@@ -88,7 +86,7 @@ class ImportProducts extends Command
 
             try {
                 $createUseCase->execute($DTOCreate);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 return $this->error($e->getMessage());
             }
 
