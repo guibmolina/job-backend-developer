@@ -107,3 +107,213 @@ Utilize a seguinte API para importar os produtos: [https://fakestoreapi.com/docs
 
 Se houver dúvidas, por favor, abra uma issue nesse repositório. Ficaremos felizes em ajudá-lo ou até mesmo melhorar essa documentação.
 
+---
+
+## Como Testar:
+
+Faça o clone do repositório na sua máquina
+
+```bash
+git clone git@github.com:guibmolina/job-backend-developer.git
+```
+
+### Configuração do ambiente
+***
+
+**Para configuração do ambiente é necessário ter o [Docker](https://docs.docker.com/desktop/) instalado em sua máquina.**
+
+Dentro da pasta do projeto, rode o seguinte comando: `docker-compose up -d`.
+
+Copie o arquivo `.env.example` a renomeie para `.env` dentro da pasta raíz da aplicação.
+
+```bash
+cp .env.example .env
+```
+
+Após criar o arquivo `.env`, será necessário acessar o container da aplicação para rodar alguns comandos de configuração do Laravel.
+
+Para acessar o container use o comando `docker exec -it yampi_test_app sh`.
+
+Digite os seguintes comandos dentro do container:
+
+```bash
+composer install
+php artisan key:generate
+php artisan migrate
+```
+
+## Endpoints
+
+###  Busca por todos os produtos
+
+Requisição
+```bash
+GET  http://localhost:8000/api/v1/products
+```
+Resposta
+```
+[
+	{
+		"id": 22,
+		"name": "Mens Casual Premium Slim Fit T-Shirts ",
+		"price": 22.3,
+		"category": "men's clothing",
+		"description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+		"image": "https:\/\/fakestoreapi.com\/img\/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+	},
+	{
+		"id": 23,
+		"name": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+		"price": 109.95,
+		"category": "men's clothing",
+		"description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+		"image": "https:\/\/fakestoreapi.com\/img\/81fPKd-2AYL._AC_SL1500_.jpg"
+	}
+]
+```
+#### É possivel adicionar filtros na busca:
+Buscar por um nome de um produto
+```bash
+GET  http://localhost:8000/api/v1/products?search[name]=geladeira
+```
+
+Buscar por um nome de um produto e por uma categoria
+```bash
+GET  http://localhost:8000/api/v1/products?search[name]=geladeira&search[category]=degelo
+```
+Por padrão a listagem retorna produtos com imagens e sem imagens, mas podemos também adicionar um filtro para retornar produtos com ou sem elas: `withImage=true` ou `withImage=false`
+```bash
+GET  http://localhost:8000/api/v1/products?withImage=true
+```
+###  Busca por um produto específico
+
+Requisição
+```bash
+GET  http://localhost:8000/api/v1/products/1
+```
+Resposta
+```
+{
+	"name": "Mens Casual Premium Slim Fit T-Shirts ",
+	"price": 22.3,
+	"description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+	"category": "men's clothing",
+	"image": "https:\/\/fakestoreapi.com\/img\/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+}
+```
+
+###  Busca por um produto específico por uma categoria específica
+
+Requisição
+```bash
+GET  http://localhost:8000/api/v1/products/categories/men's clothing
+```
+Resposta
+```
+[
+	{
+		"id": 22,
+		"name": "Mens Casual Premium Slim Fit T-Shirts ",
+		"price": 22.3,
+		"category": "men's clothing",
+		"description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+		"image": "https:\/\/fakestoreapi.com\/img\/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+	},
+	{
+		"id": 23,
+		"name": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+		"price": 109.95,
+		"category": "men's clothing",
+		"description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+		"image": "https:\/\/fakestoreapi.com\/img\/81fPKd-2AYL._AC_SL1500_.jpg"
+	}
+]
+```
+
+###  Criando um produto
+
+Requisição
+```
+POST  http://localhost:8000/api/v1/products
+
+body:
+{
+    "name": "product name",
+    "price": 109.95,
+    "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+    "category": "test",
+    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+}
+```
+Campo       | Tipo      | Obrigatório   
+----------- | :------:  | :------:        
+name        | string    	 | true                 
+price       | float     	 | true      
+decription  | string    	 | true         
+category    | string    	 | true         
+image_url   | string (url)   | false  
+
+Resposta
+```
+{
+	"id": 42
+}
+```     
+
+
+###  Atualizando um produto
+
+Requisição
+```
+PUT  http://localhost:8000/api/v1/products/{id}
+
+body:
+{
+    "name": "product name test",
+    "price": 109.95,
+    "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+    "category": "test",
+    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+}
+```
+Campo       | Tipo      | Obrigatório   
+----------- | :------:  | :------:        
+name        | string    	 | true                 
+price       | float     	 | true      
+decription  | string    	 | true         
+category    | string    	 | true         
+image_url   | string (url)   | false   
+
+Resposta
+```
+{
+	"id": 42
+}
+```
+
+###  Excluir um produto
+
+Requisição
+```bash
+DELETE  http://localhost:8000/api/v1/products/{id}
+```
+
+
+###  Importação de produtos
+Podemos realizar a importação dos produtos que estão na API [https://fakestoreapi.com/products](https://fakestoreapi.com/products)
+
+*OBS: executar os comandos abaixo dentro do container yampi_test_app*
+
+#### Importar todos os produtos 
+`php artisan products:import`
+
+#### Importar um produto  específico 
+`php artisan products:import --id={id}`
+
+***
+### Configuração do ambiente de testes
+Para conseguir rodar os testes de integração e os unitários, rodar o seguinte CREATE dentro do container de banco de dados (yampi_test_db);
+
+`CREATE database testing;`
+***
+
