@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domain\Product\Lists;
+namespace Tests\Domain\Unit\Product\Lists;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\List\ProductList;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\GetProductsByCategory;
+namespace Tests\Domain\Unit\Product\UseCases\GetProductsByCategory;
 
 use Domain\Product\List\ProductList;
 use Domain\Product\UseCases\GetProductsByCategory\Response;

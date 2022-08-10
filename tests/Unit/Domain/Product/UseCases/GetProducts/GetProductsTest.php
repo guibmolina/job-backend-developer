@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\GetProducts;
+namespace Tests\Domain\Unit\Product\UseCases\GetProducts;
 
 use Domain\Product\List\ProductList;
 use Domain\Product\Repositories\BaseRepository;

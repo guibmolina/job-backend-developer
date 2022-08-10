@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\Create;
+namespace Tests\Domain\Unit\Product\UseCases\Create;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\Exceptions\ProductAlreadyExistException;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\Delete;
+namespace Tests\Domain\Unit\Product\UseCases\Delete;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\Exceptions\NotFoundProductException;

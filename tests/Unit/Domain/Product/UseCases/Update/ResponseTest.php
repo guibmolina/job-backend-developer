@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\Update;
+namespace Tests\Domain\Unit\Product\UseCases\Update;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\UseCases\Update\Response;

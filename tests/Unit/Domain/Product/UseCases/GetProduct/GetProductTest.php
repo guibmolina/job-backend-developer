@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Product\UseCases\GetProduct;
+namespace Tests\Domain\Unit\Product\UseCases\GetProduct;
 
 use Domain\Product\Entities\ProductEntity;
 use Domain\Product\Exceptions\NotFoundProductException;
