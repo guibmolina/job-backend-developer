@@ -81,7 +81,7 @@ class ProductController extends Controller
             return response()->json(['Server Error'], 500);
         }
 
-        return response()->json($product->response());
+        return response()->json($product->response(), 201);
     }
 
     public function update(ProductRequest $request, int $id): JsonResponse
@@ -126,7 +126,7 @@ class ProductController extends Controller
             return response()->json(['Server Error'], 500);
         }
 
-        return  response()->json([], 201);
+        return  response()->json([], 204);
     }
 
     public function indexByCategory(string $category): JsonResponse
