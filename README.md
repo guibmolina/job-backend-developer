@@ -202,7 +202,7 @@ Resposta
 }
 ```
 
-###  Busca por um produto específico por uma categoria específica
+###  Busca produtos por uma categoria específica
 
 Requisição
 ```bash
