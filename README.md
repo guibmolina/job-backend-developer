@@ -230,7 +230,7 @@ Resposta
 ]
 ```
 
-###  Criando um produto
+###  Criar um produto
 
 Requisição
 ```
@@ -261,7 +261,7 @@ Resposta
 ```     
 
 
-###  Atualizando um produto
+###  Atualizar um produto
 
 Requisição
 ```
